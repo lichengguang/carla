@@ -87,7 +87,7 @@ Building CARLA
 Clone this repository locally from GitHub:
 
 ```sh
-git clone https://github.com/carla-simulator/carla.git .
+git clone git@github.com:lichengguang/carla.git
 ```
 
 Also, clone the [CARLA fork of the Unreal Engine](https://github.com/CarlaUnreal/UnrealEngine) into an appropriate location:
@@ -98,7 +98,7 @@ git clone --depth 1 -b carla https://github.com/CarlaUnreal/UnrealEngine.git .
 
 Once you have cloned the repositories, follow the instructions for [building in Linux][buildlinuxlink] or [building in Windows][buildwindowslink].
 
-[buildlinuxlink]: https://carla.readthedocs.io/en/latest/build_linux/
+[buildlinuxlink]: https://carla.readthedocs.io/en/0.9.15/build_linux/
 [buildwindowslink]: https://carla.readthedocs.io/en/latest/build_windows/
 
 Contributing
