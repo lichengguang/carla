@@ -91,7 +91,10 @@ for PY_VERSION in ${PY_VERSION_LIST[@]} ; do
     BOOST_PACKAGE_BASENAME=boost_${BOOST_VERSION//./_}
 
     log "Retrieving boost."
-    wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    # wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    # wget "https://archives.boost.io/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz"  || true
+    wget "https://carla-releases.s3.us-east-005.backblazeb2.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+
     # try to use the backup boost we have in Jenkins
     if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
       log "Using boost backup"
@@ -339,7 +342,10 @@ unset RECAST_BASENAME
 # ==============================================================================
 
 LIBPNG_VERSION=1.6.37
-LIBPNG_REPO=https://sourceforge.net/projects/libpng/files/libpng16/${LIBPNG_VERSION}/libpng-${LIBPNG_VERSION}.tar.xz
+# LIBPNG_REPO=https://sourceforge.net/projects/libpng/files/libpng16/${LIBPNG_VERSION}/libpng-${LIBPNG_VERSION}.tar.xz
+# LIBPNG_REPO=https://github.com/lichengguang/carlalibs/blob/main/libpng-1.6.37.tar.xz
+LIBPNG_REPO="git@github.com:lichengguang/carlalibs.git"
+
 LIBPNG_BASENAME=libpng-${LIBPNG_VERSION}
 LIBPNG_INSTALL=${LIBPNG_BASENAME}-install
 
@@ -350,7 +356,10 @@ if [[ -d ${LIBPNG_INSTALL} ]] ; then
   log "Libpng already installed."
 else
   log "Retrieving libpng."
-  wget ${LIBPNG_REPO}
+  # wget ${LIBPNG_REPO}
+  git clone ${LIBPNG_REPO}
+  mv carlalibs/libpng-1.6.37.tar.xz .
+  rm -rf carlalibs
 
   log "Extracting libpng."
   tar -xf libpng-${LIBPNG_VERSION}.tar.xz
